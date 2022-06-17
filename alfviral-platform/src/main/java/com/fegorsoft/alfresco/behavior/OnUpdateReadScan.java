@@ -67,6 +67,7 @@ public class OnUpdateReadScan implements
 	private boolean on_update;
 	private boolean on_read;
 	private boolean deleteOnUpdate;
+	private boolean scanAsynchronouslyOnUpdate;
 
 	/**
 	 * Init method; policies definitions and bindings
@@ -112,7 +113,7 @@ public class OnUpdateReadScan implements
 
 		if (nodeService.exists(nodeRef)) {
 			Action scanAction = actionService.createAction("alfviral.virusscan.action");
-			scanAction.setExecuteAsynchronously(true);
+			scanAction.setExecuteAsynchronously(scanAsynchronouslyOnUpdate);
 			actionService.executeAction(scanAction, nodeRef);
 
 			if (nodeService.hasAspect(nodeRef, AlfviralModel.ASPECT_INFECTED)) {
@@ -217,5 +218,13 @@ public class OnUpdateReadScan implements
 	 */
 	public void setDeleteOnUpdate(boolean deleteOnUpdate) {
 		this.deleteOnUpdate = deleteOnUpdate;
+	}
+
+	public boolean isScanAsynchronouslyOnUpdate() {
+		return scanAsynchronouslyOnUpdate;
+	}
+
+	public void setScanAsynchronouslyOnUpdate(boolean scanAsynchronouslyOnUpdate) {
+		this.scanAsynchronouslyOnUpdate = scanAsynchronouslyOnUpdate;
 	}
 }

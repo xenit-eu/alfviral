@@ -227,6 +227,9 @@
         <property name="onRead">
             <value>${alfviral.on_read}</value>
         </property>
+        <property name="scanAsynchronouslyOnUpdate">
+            <value>${alfviral.on_update.asynchronously}</value>
+        </property>
     </bean>
     
 	<!-- Beans of scans -->
