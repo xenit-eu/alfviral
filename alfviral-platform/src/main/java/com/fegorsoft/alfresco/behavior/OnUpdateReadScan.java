@@ -22,6 +22,7 @@ import org.alfresco.repo.policy.Behaviour;
 import org.alfresco.repo.policy.Behaviour.NotificationFrequency;
 import org.alfresco.repo.policy.JavaBehaviour;
 import org.alfresco.repo.policy.PolicyComponent;
+import org.alfresco.service.cmr.action.Action;
 import org.alfresco.service.cmr.action.ActionService;
 import org.alfresco.service.cmr.repository.NodeRef;
 import org.alfresco.service.cmr.repository.NodeService;
@@ -110,9 +111,9 @@ public class OnUpdateReadScan implements
 		}
 
 		if (nodeService.exists(nodeRef)) {
-			actionService.executeAction(
-					actionService.createAction("alfviral.virusscan.action"),
-					nodeRef);
+			Action scanAction = actionService.createAction("alfviral.virusscan.action");
+			scanAction.setExecuteAsynchronously(true);
+			actionService.executeAction(scanAction, nodeRef);
 
 			if (nodeService.hasAspect(nodeRef, AlfviralModel.ASPECT_INFECTED)) {
 
