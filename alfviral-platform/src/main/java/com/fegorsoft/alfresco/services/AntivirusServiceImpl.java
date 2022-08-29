@@ -94,6 +94,7 @@ public class AntivirusServiceImpl implements AntivirusService {
 	private boolean notifyAdmin;
 	private boolean notifyUser;
 	private String notifyFrom;
+	private String notifySubject;
 	private String notifyAdminTemplate;
 	private String notifyUserTemplate;
 	private boolean notifyAsynchronously;
@@ -320,18 +321,16 @@ public class AntivirusServiceImpl implements AntivirusService {
 
 		if (notifyUser) {
 			String userMail = (String) nodeService.getProperty(userNodeRef, ContentModel.PROP_EMAIL);
-			final String subject = "Document infected!";
 			final String alternativeText = "File infected with NodeRef: " + nodeRef + ". Contact your administrator ASAP.";
-			sendMailNotification(userMail, subject, alternativeText, notifyUserTemplate, nodeRef, userNodeRef);
+			sendMailNotification(userMail, notifySubject, alternativeText, notifyUserTemplate, nodeRef, userNodeRef);
 		}
 
 		if (notifyAdmin) {
-			final String subject = "File infected!";
 			final String alternativeText = "File infected with NodeRef: " + nodeRef + " uploaded by user: " + userName;
 
 			NodeRef nrAdmin = personService.getPerson("admin");
 			String userAdminMail = (String) nodeService.getProperty(nrAdmin, ContentModel.PROP_EMAIL);
-			sendMailNotification(userAdminMail, subject, alternativeText, notifyAdminTemplate, nodeRef, userNodeRef);
+			sendMailNotification(userAdminMail, notifySubject, alternativeText, notifyAdminTemplate, nodeRef, userNodeRef);
 		}
 	}
 
@@ -428,6 +427,8 @@ public class AntivirusServiceImpl implements AntivirusService {
 	public void setNotifyUser(boolean notifyUser) {
 		this.notifyUser = notifyUser;
 	}
+
+	public void setNotifySubject(String subject) { this.notifySubject = subject; }
 
 	public boolean isNotifyAsynchronously() {
 		return notifyAsynchronously;
