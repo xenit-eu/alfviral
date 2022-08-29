@@ -43,7 +43,7 @@ import com.fegorsoft.alfresco.model.AlfviralModel;
  * @author fegor
  * 
  */
-public final class VirusTotalScan implements VirusScanMode {
+public final class VirusTotalScan extends VirusScanMode {
 
 	private final Logger logger = Logger.getLogger(VirusTotalScan.class);
 
@@ -163,16 +163,6 @@ public final class VirusTotalScan implements VirusScanMode {
 		}
 
 		return result;
-	}
-
-	/*
-	 * Re-scanning
-	 * 
-	 * @see com.fegorsoft.alfresco.security.antivirus.VirusScanMode#rescan()
-	 */
-	@Override
-	public int rescan() throws IOException {
-		return this.scan();
 	}
 
 	/*

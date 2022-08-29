@@ -32,7 +32,7 @@ import com.fegorsoft.alfresco.model.AlfviralModel;
  * @author fegor
  * 
  */
-public final class CommandScan implements VirusScanMode {
+public final class CommandScan extends VirusScanMode {
 	private final Logger logger = Logger.getLogger(CommandScan.class);
 
 	private List<String> command;

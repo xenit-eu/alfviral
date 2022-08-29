@@ -17,17 +17,22 @@
 package com.fegorsoft.alfresco.security.antivirus;
 
 import java.io.IOException;
-
 import org.alfresco.service.cmr.repository.NodeRef;
 
-public interface VirusScanMode {
-	public final String ScanModeCommand = "COMMAND";
-	public final String ScanModeInStream = "INSTREAM";
-	public final String ScanModeVirusTotal = "VIRUSTOTAL";
-	public final String ScanModeICap = "ICAP";
-	
-	int scan(NodeRef nodeRef) throws IOException;
-	int scan() throws IOException;
-	int rescan() throws IOException;
-	int report() throws IOException;
+public abstract class VirusScanMode {
+
+    public static final String ScanModeCommand = "COMMAND";
+    public static final String ScanModeInStream = "INSTREAM";
+    public static final String ScanModeVirusTotal = "VIRUSTOTAL";
+    public static final String ScanModeICap = "ICAP";
+
+    public abstract int scan(NodeRef nodeRef) throws IOException;
+
+    public abstract int scan() throws IOException;
+
+    public int rescan() throws IOException {
+        return this.scan();
+    }
+
+    public abstract int report() throws IOException;
 }
