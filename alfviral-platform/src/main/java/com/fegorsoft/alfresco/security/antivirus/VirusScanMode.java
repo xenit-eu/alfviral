@@ -16,8 +16,16 @@
  */
 package com.fegorsoft.alfresco.security.antivirus;
 
+import com.fegorsoft.alfresco.model.AlfviralModel;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.repository.NodeService;
+import org.alfresco.service.namespace.QName;
+import org.apache.log4j.Logger;
 
 public abstract class VirusScanMode {
 
@@ -25,6 +33,8 @@ public abstract class VirusScanMode {
     public static final String ScanModeInStream = "INSTREAM";
     public static final String ScanModeVirusTotal = "VIRUSTOTAL";
     public static final String ScanModeICap = "ICAP";
+    private final Logger logger = Logger.getLogger(VirusScanMode.class);
+    protected NodeService nodeService;
 
     public abstract int scan(NodeRef nodeRef) throws IOException;
 
@@ -35,4 +45,15 @@ public abstract class VirusScanMode {
     }
 
     public abstract int report() throws IOException;
+
+    protected void addScanDate(NodeRef nodeRef) {
+        logger.debug("Updating scan date of nodeRef=" + nodeRef);
+        if (nodeService == null) {
+            logger.warn("NodeService is null. Aborting");
+            return;
+        }
+        Map<QName, Serializable> aspectProperties = new HashMap<>();
+        aspectProperties.put(AlfviralModel.PROP_SCANNED_DATE, new Date());
+        nodeService.addAspect(nodeRef, AlfviralModel.ASPECT_SCANNED, aspectProperties);
+    }
 }

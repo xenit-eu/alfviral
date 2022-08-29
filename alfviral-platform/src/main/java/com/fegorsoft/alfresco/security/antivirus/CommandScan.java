@@ -39,7 +39,6 @@ public final class CommandScan extends VirusScanMode {
 
 	private String file_to_scan;
 
-	private NodeService nodeService;
 	private NodeRef nodeRef;
 
 	/**
@@ -63,7 +62,7 @@ public final class CommandScan extends VirusScanMode {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		addScanDate(nodeRef);
 		return res;
 	}
 	

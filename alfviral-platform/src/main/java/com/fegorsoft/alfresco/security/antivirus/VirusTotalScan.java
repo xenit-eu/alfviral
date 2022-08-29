@@ -47,7 +47,6 @@ public final class VirusTotalScan extends VirusScanMode {
 
 	private final Logger logger = Logger.getLogger(VirusTotalScan.class);
 
-	private NodeService nodeService;
 	private NodeRef nodeRef;
 
 	private String key = "";
@@ -97,6 +96,7 @@ public final class VirusTotalScan extends VirusScanMode {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+		addScanDate(nodeRef);
 		return res;
 	}
 	

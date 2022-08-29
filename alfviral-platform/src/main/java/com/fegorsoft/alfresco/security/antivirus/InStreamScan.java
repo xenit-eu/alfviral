@@ -47,7 +47,6 @@ public final class InStreamScan extends VirusScanMode {
 	private int port;
 	private String host;
 	private int timeout;
-	private NodeService nodeService;
 	private NodeRef nodeRef;
 
 	/**
@@ -103,6 +102,7 @@ public final class InStreamScan extends VirusScanMode {
 		} catch (IOException e) {
 			logger.error("Error while scanning NodeRef: " + nodeRef, e);
 		}
+		addScanDate(nodeRef);
 		return res;
 	}
 	
@@ -217,7 +217,7 @@ public final class InStreamScan extends VirusScanMode {
 	}
 
 	/**
-	 * Add aspect Scaned From ClamAV is not assigned
+	 * Add aspect Scanned From ClamAV is not assigned
 	 */
 	private void addAspect() {
 		

@@ -43,7 +43,6 @@ public final class ICAPScan extends VirusScanMode {
 	private int port;
 	private String host;
 	private String service;
-	private NodeService nodeService;
 	private NodeRef nodeRef;
 
 	/**
@@ -100,6 +99,7 @@ public final class ICAPScan extends VirusScanMode {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		addScanDate(nodeRef);
 		return res;
 	}
 	
