@@ -83,7 +83,7 @@ public final class InStreamScan extends VirusScanMode {
 			}
 		}
 		
-		if (result == true) {
+		if (result) {
 			logger.info(getClass().getName() + "Connect to INSTREAM is OK");
 		}
 		
@@ -99,10 +99,10 @@ public final class InStreamScan extends VirusScanMode {
 		this.nodeRef = nodeRef;
 		try {
 			res = scan();
+			addScanDate(nodeRef);
 		} catch (IOException e) {
 			logger.error("Error while scanning NodeRef: " + nodeRef, e);
 		}
-		addScanDate(nodeRef);
 		return res;
 	}
 	

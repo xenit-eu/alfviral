@@ -57,12 +57,11 @@ public final class CommandScan extends VirusScanMode {
 		
 		try {
 			res = scan();
-		} 
-		
+			addScanDate(nodeRef);
+		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		addScanDate(nodeRef);
 		return res;
 	}
 	

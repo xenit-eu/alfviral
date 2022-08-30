@@ -91,12 +91,11 @@ public final class VirusTotalScan extends VirusScanMode {
 		
 		try {
 			res = scan();
-		} 
-		
+			addScanDate(nodeRef);
+		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		addScanDate(nodeRef);
 		return res;
 	}
 	
@@ -195,7 +194,7 @@ public final class VirusTotalScan extends VirusScanMode {
 
 				if (logger.isDebugEnabled()) {
 					logger.debug(this.getClass().getName()
-							+ ": [HTTP Coonect (report) try: " + i + "]");
+							+ ": [HTTP Connect (report) try: " + i + "]");
 				}
 
 				this.jsoReport = new JSONObject(

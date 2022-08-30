@@ -95,11 +95,11 @@ public final class ICAPScan extends VirusScanMode {
 		this.nodeRef = nodeRef;
 		try {
 			res = scan();
+			addScanDate(nodeRef);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		addScanDate(nodeRef);
 		return res;
 	}
 	
