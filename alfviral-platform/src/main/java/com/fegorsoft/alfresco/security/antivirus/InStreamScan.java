@@ -38,7 +38,7 @@ import com.fegorsoft.alfresco.model.AlfviralModel;
  * @author fegor
  *
  */
-public final class InStreamScan implements VirusScanMode {
+public final class InStreamScan extends VirusScanMode {
 
 	private final Logger logger = Logger.getLogger(InStreamScan.class);
 
@@ -47,7 +47,6 @@ public final class InStreamScan implements VirusScanMode {
 	private int port;
 	private String host;
 	private int timeout;
-	private NodeService nodeService;
 	private NodeRef nodeRef;
 
 	/**
@@ -84,7 +83,7 @@ public final class InStreamScan implements VirusScanMode {
 			}
 		}
 		
-		if (result == true) {
+		if (result) {
 			logger.info(getClass().getName() + "Connect to INSTREAM is OK");
 		}
 		
@@ -100,6 +99,7 @@ public final class InStreamScan implements VirusScanMode {
 		this.nodeRef = nodeRef;
 		try {
 			res = scan();
+			addScanDate(nodeRef);
 		} catch (IOException e) {
 			logger.error("Error while scanning NodeRef: " + nodeRef, e);
 		}
@@ -206,16 +206,6 @@ public final class InStreamScan implements VirusScanMode {
 	}
 
 	/*
-	 * Re-scanning
-	 * 
-	 * @see com.fegorsoft.alfresco.security.antivirus.VirusScanMode#rescan()
-	 */
-	@Override
-	public int rescan() throws IOException {
-		return scan();
-	}
-
-	/*
 	 * Report
 	 * 
 	 * @see com.fegorsoft.alfresco.security.antivirus.VirusScanMode#report()
@@ -227,7 +217,7 @@ public final class InStreamScan implements VirusScanMode {
 	}
 
 	/**
-	 * Add aspect Scaned From ClamAV is not assigned
+	 * Add aspect Scanned From ClamAV is not assigned
 	 */
 	private void addAspect() {
 		

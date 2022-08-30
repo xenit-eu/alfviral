@@ -35,7 +35,7 @@ import com.fegorsoft.alfresco.protocols.icap.ICAPException;
  * @author fegor
  *
  */
-public final class ICAPScan implements VirusScanMode {
+public final class ICAPScan extends VirusScanMode {
 
 	private final Logger logger = Logger.getLogger(ICAPScan.class);
 
@@ -43,7 +43,6 @@ public final class ICAPScan implements VirusScanMode {
 	private int port;
 	private String host;
 	private String service;
-	private NodeService nodeService;
 	private NodeRef nodeRef;
 
 	/**
@@ -96,6 +95,7 @@ public final class ICAPScan implements VirusScanMode {
 		this.nodeRef = nodeRef;
 		try {
 			res = scan();
+			addScanDate(nodeRef);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,16 +149,6 @@ public final class ICAPScan implements VirusScanMode {
 		}
 
 		return result;
-	}
-
-	/*
-	 * Re-scanning
-	 * 
-	 * @see com.fegorsoft.alfresco.security.antivirus.VirusScanMode#rescan()
-	 */
-	@Override
-	public int rescan() throws IOException {
-		return scan();
 	}
 
 	/*

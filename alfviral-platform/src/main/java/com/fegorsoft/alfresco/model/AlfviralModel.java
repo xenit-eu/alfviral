@@ -30,6 +30,9 @@ public interface AlfviralModel {
 	 */
 	public static final QName ASPECT_INFECTED = QName.createQName(
 			NAMESPACE_ALFVIRAL_CONTENT_MODEL, "infected");
+
+	public static final QName ASPECT_SCANNED = QName.createQName(
+			NAMESPACE_ALFVIRAL_CONTENT_MODEL, "scanned");
 	public static final QName ASPECT_SCANNED_FROM_COMMAND = QName.createQName(
 			NAMESPACE_ALFVIRAL_CONTENT_MODEL, "scanned_from_command");
 	public static final QName ASPECT_SCANNED_FROM_CLAMAV = QName.createQName(
@@ -42,6 +45,9 @@ public interface AlfviralModel {
 	/*
 	 * Properties
 	 */
+
+	public static final QName PROP_SCANNED_DATE = QName.createQName(
+			NAMESPACE_ALFVIRAL_CONTENT_MODEL, "scanDate");
 	public static final QName PROP_INFECTED_DATE = QName.createQName(
 			NAMESPACE_ALFVIRAL_CONTENT_MODEL, "date");
 	public static final QName PROP_INFECTED_CLEAN = QName.createQName(

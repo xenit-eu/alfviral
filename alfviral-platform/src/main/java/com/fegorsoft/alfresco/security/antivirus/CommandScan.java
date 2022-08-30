@@ -32,14 +32,13 @@ import com.fegorsoft.alfresco.model.AlfviralModel;
  * @author fegor
  * 
  */
-public final class CommandScan implements VirusScanMode {
+public final class CommandScan extends VirusScanMode {
 	private final Logger logger = Logger.getLogger(CommandScan.class);
 
 	private List<String> command;
 
 	private String file_to_scan;
 
-	private NodeService nodeService;
 	private NodeRef nodeRef;
 
 	/**
@@ -58,12 +57,11 @@ public final class CommandScan implements VirusScanMode {
 		
 		try {
 			res = scan();
-		} 
-		
+			addScanDate(nodeRef);
+		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return res;
 	}
 	

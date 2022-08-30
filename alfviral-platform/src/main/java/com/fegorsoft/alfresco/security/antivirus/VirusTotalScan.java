@@ -43,11 +43,10 @@ import com.fegorsoft.alfresco.model.AlfviralModel;
  * @author fegor
  * 
  */
-public final class VirusTotalScan implements VirusScanMode {
+public final class VirusTotalScan extends VirusScanMode {
 
 	private final Logger logger = Logger.getLogger(VirusTotalScan.class);
 
-	private NodeService nodeService;
 	private NodeRef nodeRef;
 
 	private String key = "";
@@ -92,8 +91,8 @@ public final class VirusTotalScan implements VirusScanMode {
 		
 		try {
 			res = scan();
-		} 
-		
+			addScanDate(nodeRef);
+		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -166,16 +165,6 @@ public final class VirusTotalScan implements VirusScanMode {
 	}
 
 	/*
-	 * Re-scanning
-	 * 
-	 * @see com.fegorsoft.alfresco.security.antivirus.VirusScanMode#rescan()
-	 */
-	@Override
-	public int rescan() throws IOException {
-		return this.scan();
-	}
-
-	/*
 	 * Report
 	 * 
 	 * @see com.fegorsoft.alfresco.security.antivirus.VirusScanMode#report()
@@ -205,7 +194,7 @@ public final class VirusTotalScan implements VirusScanMode {
 
 				if (logger.isDebugEnabled()) {
 					logger.debug(this.getClass().getName()
-							+ ": [HTTP Coonect (report) try: " + i + "]");
+							+ ": [HTTP Connect (report) try: " + i + "]");
 				}
 
 				this.jsoReport = new JSONObject(

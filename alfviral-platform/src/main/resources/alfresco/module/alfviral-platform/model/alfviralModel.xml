@@ -37,6 +37,20 @@
 				</property>
 			</properties>
 		</aspect>
+		<aspect name="ava:scanned">
+			<title>Scanned</title>
+			<properties>
+				<property name="ava:scanDate">
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+					<index enabled="true">
+						<atomic>false</atomic>
+						<stored>false</stored>
+						<tokenised>false</tokenised>
+					</index>
+				</property>
+			</properties>
+		</aspect>
 		<aspect name="ava:scanned_from_command">
             <title>Scannned from Command</title>
         </aspect>
